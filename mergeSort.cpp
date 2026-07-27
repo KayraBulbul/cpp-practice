@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-std::vector<int> mergeSort(std::vector<int> &myVec, int start, int end);
+std::vector<int> mergeSort(std::vector<int> myVec, int start, int end);
 std::vector<int> merge(std::vector<int> vec1, std::vector<int> vec2);
 
 int main() {
