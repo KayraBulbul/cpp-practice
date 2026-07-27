@@ -1,8 +1,10 @@
 #include <iostream>
 #include <vector>
 
-std::vector<int> mergeSort(std::vector<int> myVec, int start, int end);
-std::vector<int> merge(std::vector<int> vec1, std::vector<int> vec2);
+std::vector<int> mergeSort(const std::vector<int> &myVec, size_t start,
+                           size_t end);
+std::vector<int> merge(const std::vector<int> &vec1,
+                       const std::vector<int> &vec2);
 
 int main() {
   std::vector<int> nums = {8, 3, 6, 2, 7};
@@ -15,7 +17,8 @@ int main() {
   return 0;
 }
 
-std::vector<int> mergeSort(const std::vector<int> myVec, int start, int end) {
+std::vector<int> mergeSort(const std::vector<int> &myVec, size_t start,
+                           size_t end) {
   if (end - start == 0) {
     return std::vector<int>{};
   }
@@ -29,13 +32,15 @@ std::vector<int> mergeSort(const std::vector<int> myVec, int start, int end) {
   return merge(mergeSort(myVec, start, middle), mergeSort(myVec, middle, end));
 }
 
-std::vector<int> merge(std::vector<int> vec1, std::vector<int> vec2) {
+std::vector<int> merge(const std::vector<int> &vec1,
+                       const std::vector<int> &vec2) {
   size_t i = 0;
   size_t j = 0;
   std::vector<int> sorted;
+  sorted.reserve(vec1.size() + vec2.size());
 
   while (i < vec1.size() && j < vec2.size()) {
-    if (vec1[i] < vec2[j]) {
+    if (vec1[i] <= vec2[j]) {
       sorted.push_back(vec1[i]);
       i++;
     } else {
@@ -44,14 +49,14 @@ std::vector<int> merge(std::vector<int> vec1, std::vector<int> vec2) {
     }
   }
 
-  if (i == vec1.size()) {
-    for (size_t k = j; k < vec2.size(); k++) {
-      sorted.push_back(vec2[k]);
-    }
-  } else if (j == vec2.size()) {
-    for (size_t k = i; k < vec1.size(); k++) {
-      sorted.push_back(vec1[k]);
-    }
+  while (i < vec1.size()) {
+    sorted.push_back(vec1[i]);
+    i++;
+  }
+
+  while (j < vec2.size()) {
+    sorted.push_back(vec2[j]);
+    j++;
   }
 
   return sorted;
