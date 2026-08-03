@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 
-int countEvens(std::vector<int> nums);
+int countEvens(const std::vector<int> nums);
 
 int main() {
   std::vector<int> nums = {4, 7, 2, 9, 10};
@@ -14,7 +14,7 @@ int main() {
   return 0;
 }
 
-int countEvens(std::vector<int> nums) {
+int countEvens(const std::vector<int> nums) {
   int count = 0;
 
   for (int num : nums) {
