@@ -18,7 +18,7 @@ int main() {
       sum += i;
     }
   } else {
-    std::cout << start + end << std::endl;
+    sum = start + end;
   }
 
   std::cout << sum << std::endl;
